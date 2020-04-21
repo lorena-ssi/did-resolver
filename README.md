@@ -15,7 +15,7 @@ import LorenaDidResolver from '@lorena-ssi/did-resolver'
 // returns an object of { methodName: resolveFunction}
 lorResolver = LorenaDidResolver.getResolver()
 
-// If you are using one method you can simply pass the result of `getResolver()` into the constructor
+// If you are using only one method you can simply pass the result of `getResolver()` into the constructor
 const resolver = new Resolver(lorResolver)
 ```
 
