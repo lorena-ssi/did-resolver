@@ -43,10 +43,15 @@
   "scripts": {
     "coverage": "nyc npm run mocha && nyc report --reporter=html --reporter=lcov --reporter=text",
     "coveralls": "nyc npm run mocha && nyc report --reporter=text-lcov | coveralls",
-    "lint": "eslint ./src ./test",
+    "lint": "eslint . ./test",
     "lint-fix": "eslint ./src ./test --fix",
     "npm:publish": "npm publish --access public",
     "mocha": "mocha test --timeout 20000 --bail",
     "test": "npm run mocha"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }

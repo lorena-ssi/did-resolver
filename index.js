@@ -67,6 +67,7 @@ function getResolver () {
       return didDoc.data
     }
 
+    // TODO: process path and fragment
     // {method: 'mymethod', id: 'abcdefg', did: 'did:mymethod:abcdefg/some/path#fragment=123', path: '/some/path', fragment: 'fragment=123'}
     return didDoc.data
   }
