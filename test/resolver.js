@@ -20,15 +20,17 @@ describe('did-resolver interface', () => {
   it('should get the complete DID Document for a DID', async () => {
     const doc = await resolver.resolve('did:lor:labtest:324793842738472')
     console.log(doc)
+    // TODO: using a valid DID, retrieve valid did doc
   })
 
   it('should get the fragment for a DID path', async () => {
     const doc = await resolver.resolve('did:lor:labtest:324793842738472/path/to#fragment=123')
     console.log(doc)
+    // TODO: using a valid DID path, retrieve valid did doc fragment
   })
 
   it('should get nothing for an unknown DID', async () => {
     const doc = await resolver.resolve('did:lor:xxx:324793842738472')
-    console.log(doc)
+    expect(doc).to.be.null
   })
 })

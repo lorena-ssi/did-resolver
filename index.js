@@ -22,17 +22,17 @@ function getResolver () {
     parsed, // : ParsedDID,
     didResolver // : DIDResolver
   ) /* : Promise<DIDDocument | null> */ {
-    console.log(parsed)
+    // console.log(parsed)
 
     const info = getInfoForDid(did)
     if (!info) {
       return null
     }
 
-    /*let blockchain
+    /* let blockchain
     if (info.type === 'substrate') {
       blockchain = substrate.
-    }*/
+    } */
     // {method: 'mymethod', id: 'abcdefg', did: 'did:mymethod:abcdefg/some/path#fragment=123', path: '/some/path', fragment: 'fragment=123'}
     const didDoc = {} // ...// lookup doc
     return didDoc
