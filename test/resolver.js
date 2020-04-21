@@ -17,14 +17,24 @@ describe('did-resolver interface', () => {
     expect(resolver.resolve).to.not.be.undefined
   })
 
+  it('should get nothing for a nonexistent DID', async () => {
+    // using a invalid DID, empty did doc
+    const did = 'did:lor:labdev:TuNaFiShSaNdWiChAnDfRiEsPlEaSe5q'
+    const doc = await resolver.resolve(did)
+    expect(doc).to.be.empty
+  })
+
   it('should get the complete DID Document for a DID', async () => {
-    const doc = await resolver.resolve('did:lor:labtest:324793842738472')
-    console.log(doc)
-    // TODO: using a valid DID, retrieve valid did doc
+    // using a valid DID, retrieve valid did doc
+    const did = 'did:lor:labdev:Wldvd1pqVmZWbEoxYVdaWFdGOW5ja05I'
+    const doc = await resolver.resolve(did)
+    expect(doc.id).to.eq(did)
+    expect(doc.authentication[0].id).to.contain(did)
   })
 
   it('should get the fragment for a DID path', async () => {
-    const doc = await resolver.resolve('did:lor:labtest:324793842738472/path/to#fragment=123')
+    const did = 'did:lor:labdev:Wldvd1pqVmZWbEoxYVdaWFdGOW5ja05I/service/0#serviceEndpoint'
+    const doc = await resolver.resolve(did)
     console.log(doc)
     // TODO: using a valid DID path, retrieve valid did doc fragment
   })

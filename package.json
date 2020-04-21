@@ -19,7 +19,10 @@
     "url": "https://github.com/lorena-ssi/did-resolver/issues"
   },
   "homepage": "https://github.com/lorena-ssi/did-resolver#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@lorena-ssi/matrix-lib": "^1.0.9",
+    "@lorena-ssi/substrate-lib": "^2.1.3"
+  },
   "devDependencies": {
     "chai": "^4.2.0",
     "coveralls": "^3.0.11",

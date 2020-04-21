@@ -1,7 +1,7 @@
 const networks = require('./networks.json')
-// const matrix = require('@lorena-ssi/matrix-lib')
-// const maxonrow = require('@lorena-ssi/maxonrow-lib')
-// const substrate = require('@lorena-ssi/substrate-lib')
+const Matrix = require('@lorena-ssi/matrix-lib')
+// const Maxonrow = require('@lorena-ssi/maxonrow-lib')
+const Substrate = require('@lorena-ssi/substrate-lib')
 
 /**
  * Interface for did-resolver
@@ -29,13 +29,46 @@ function getResolver () {
       return null
     }
 
-    /* let blockchain
+    // Use the blockchain appropriate to the network
+    let Blockchain
     if (info.type === 'substrate') {
-      blockchain = substrate.
-    } */
+      Blockchain = Substrate
+    } else {
+      throw new Error('unsupported network type')
+    }
+
+    // Connect to the blockchain
+    const connection = new Blockchain(info.blockchainEndpoint)
+    if (!await connection.connect()) {
+      throw new Error('unable to connect')
+    }
+
+    // Look it up in the blockchain with just the ID
+    const didParts = parsed.id.split(':')
+    const didDocHash = await connection.getDidDocHash(didParts[1])
+    connection.disconnect()
+
+    // If there is no DID Document registered, return nothing
+    if (didDocHash === '') {
+      return {}
+    }
+
+    // Connect to Matrix to get the DID Document
+    const matrix = await new Matrix(info.matrixEndpoint)
+    const didDoc = await matrix.downloadFile(didDocHash)
+
+    // no DID Document found: return nothing
+    if (!didDoc || !didDoc.data) {
+      return {}
+    }
+
+    // if there's no path, just return the whole shebang
+    if (parsed.did === parsed.didUrl) {
+      return didDoc.data
+    }
+
     // {method: 'mymethod', id: 'abcdefg', did: 'did:mymethod:abcdefg/some/path#fragment=123', path: '/some/path', fragment: 'fragment=123'}
-    const didDoc = {} // ...// lookup doc
-    return didDoc
+    return didDoc.data
   }
 
   return { lor: resolve }
