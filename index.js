@@ -83,7 +83,17 @@ function getResolver () {
  */
 function getInfoForDid (did) {
   const arr = /did:lor:(.*?):.*/.exec(did)
-  return networks[`did:lor:${arr[1]}`]
+  return getInfoForNetwork(arr[1])
 }
 
-module.exports = { getResolver, getInfoForDid }
+/**
+ * Returns information for the network specified
+ *
+ * @param {string} network for which to retrieve endpoint information
+ * @returns {JSON} endpoint information (or undefined)
+ */
+function getInfoForNetwork (network) {
+  return networks[`did:lor:${network}`]
+}
+
+module.exports = { getResolver, getInfoForDid, getInfoForNetwork }
