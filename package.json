@@ -1,0 +1,49 @@
+{
+  "name": "@lorena-ssi/did-resolver",
+  "version": "0.1.0",
+  "description": "Resolve DID Documents from DIDs in the Lorena namespace",
+  "main": "index.js",
+  "author": "Caelum Labs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lorena-ssi/did-resolver.git"
+  },
+  "keywords": [
+    "lorena",
+    "identity",
+    "did",
+    "ssi"
+  ],
+  "bugs": {
+    "url": "https://github.com/lorena-ssi/did-resolver/issues"
+  },
+  "homepage": "https://github.com/lorena-ssi/did-resolver#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.11",
+    "did-resolver": "^1.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-chai-friendly": "^0.5.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsdoc": "^24.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.5",
+    "mocha": "^7.1.1",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nyc": "^15.0.1"
+  },
+  "scripts": {
+    "coverage": "nyc npm run mocha && nyc report --reporter=html --reporter=lcov --reporter=text",
+    "coveralls": "nyc npm run mocha && nyc report --reporter=text-lcov | coveralls",
+    "lint": "eslint ./src ./test",
+    "lint-fix": "eslint ./src ./test --fix",
+    "npm:publish": "npm publish --access public",
+    "mocha": "mocha test --timeout 20000 --bail",
+    "test": "npm run mocha"
+  }
+}
