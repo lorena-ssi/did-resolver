@@ -12,10 +12,10 @@ The Lorena DID resolver exposes a function called `getResolver` which will retur
 import { Resolver } from 'did-resolver'
 import LorenaDidResolver from '@lorena-ssi/did-resolver'
 
-//returns an object of { methodName: resolveFunction}
+// returns an object of { methodName: resolveFunction}
 lorResolver = LorenaDidResolver.getResolver()
 
-//If you are using one method you can simply pass the result of getResolver( into the constructor
+// If you are using one method you can simply pass the result of `getResolver()` into the constructor
 const resolver = new Resolver(lorResolver)
 ```
 
