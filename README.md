@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/lorena-ssi/did-resolver.svg?branch=master)](https://travis-ci.com/lorena-ssi/did-resolver)
 [![Coverage Status](https://coveralls.io/repos/github/lorena-ssi/did-resolver/badge.svg?branch=master)](https://coveralls.io/github/lorena-ssi/did-resolver?branch=master&service=github)
 
-Resolve DID Documents from DIDs in the Lorena namespace.  This is is a plug-in for [did-resolver](https://www.npmjs.com/package/did-resolver)
+Resolve DID Documents from DIDs in the Lorena namespace.  This is is a plug-in for the [Decentralized Identity Foundation](https://identity.foundation) [did-resolver](https://www.npmjs.com/package/did-resolver).
 
 ## Usage
 
