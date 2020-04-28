@@ -6,9 +6,9 @@
   "did:lor:lab": { "type": "substrate", "blockchainEndpoint": "wss://lab.substrate.lorena.tech", "matrixEndpoint": "https://lab.matrix.lorena.tech"},
   "did:lor:labdev": { "type": "substrate", "blockchainEndpoint": "wss://labdev.substrate.lorena.tech", "matrixEndpoint": "https://labdev.matrix.lorena.tech"},
   "did:lor:labtest": { "type": "substrate", "blockchainEndpoint": "wss://labtest.substrate.lorena.tech", "matrixEndpoint": "https://labtest.matrix.lorena.tech"},
-  "did:lor:mxn": { "type": "maxonrow", "blockchainEndpoint": "http://47.244.139.182:26657", "matrixEndpoint": "https://labtest.matrix.lorena.tech"},
-  "did:lor:max": { "type": "maxonrow", "blockchainEndpoint": "http://47.244.139.182:26657", "matrixEndpoint": "https://labtest.matrix.lorena.tech"},
-  "did:lor:maxtest": { "type": "maxonrow", "blockchainEndpoint": "http://47.244.139.182:26657", "matrixEndpoint": "https://labtest.matrix.lorena.tech"},
+  "did:lor:mxn": { "type": "maxonrow", "blockchainEndpoint": "http://47.244.139.182:26657", "matrixEndpoint": "https://labtest.matrix.lorena.tech", "symbol": "LORMAX"},
+  "did:lor:max": { "type": "maxonrow", "blockchainEndpoint": "http://47.244.139.182:26657", "matrixEndpoint": "https://labtest.matrix.lorena.tech", "symbol": "LORMAX"},
+  "did:lor:maxtest": { "type": "maxonrow", "blockchainEndpoint": "http://47.244.139.182:26657", "matrixEndpoint": "https://labtest.matrix.lorena.tech", "symbol": "LORMAX"},
   "did:lor:tgn": { "type": "substrate", "blockchainEndpoint": "wss://tgn.substrate.lorena.tech", "matrixEndpoint": "https://tgn.matrix.lorena.tech"},
   "did:lor:tgntest": { "type": "substrate", "blockchainEndpoint": "wss://tgntest.substrate.lorena.tech", "matrixEndpoint": "https://tgntest.matrix.lorena.tech"}
 }
