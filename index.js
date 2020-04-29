@@ -1,7 +1,8 @@
 const networks = require('./networks.json')
 const Matrix = require('@lorena-ssi/matrix-lib')
-// const Maxonrow = require('@lorena-ssi/maxonrow-lib')
-const Substrate = require('@lorena-ssi/substrate-lib')
+const MaxonrowBlockchain = require('@lorena-ssi/maxonrow-lib')
+const SubstrateBlockchain = require('@lorena-ssi/substrate-lib')
+const bip39 = require('bip39')
 
 /**
  * Interface for did-resolver
@@ -29,19 +30,36 @@ function getResolver () {
       return null
     }
 
-    // Use the blockchain appropriate to the network
-    let Blockchain
-    if (info.type === 'substrate') {
-      Blockchain = Substrate
-    } else {
-      throw new Error('unsupported network type')
+    // Connect to Blockchain
+    let connection
+    switch (info.type) {
+      case 'maxonrow':
+        connection = new MaxonrowBlockchain(info.symbol, {
+          connection: {
+            url: info.blockchainEndpoint,
+            timeout: 60000
+          },
+          trace: {
+            silent: true,
+            silentRpc: true
+          },
+          chainId: 'maxonrow-chain',
+          name: 'mxw'
+        })
+        break
+      case 'substrate':
+        connection = new SubstrateBlockchain(info.blockchainEndpoint)
+        break
+      default:
+        throw new Error(`Unsupported network type ${info.type}`)
     }
 
     // Connect to the blockchain
-    const connection = new Blockchain(info.blockchainEndpoint)
-    if (!await connection.connect()) {
-      throw new Error('unable to connect')
-    }
+    await connection.connect()
+
+    // Even though we are read-only, we need to supply a key (for reasons)
+    // to a certain blockchain. So here's a key.
+    connection.setKeyring(bip39.generateMnemonic())
 
     // Look it up in the blockchain with just the ID
     const didParts = parsed.id.split(':')
