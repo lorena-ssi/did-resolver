@@ -24,20 +24,29 @@ describe('did-resolver interface', () => {
     expect(doc).to.be.empty
   })
 
-  it('should get the complete DID Document for a DID', async () => {
-    // using a valid DID, retrieve valid did doc
-    const did = 'did:lor:labdev:Wldvd1pqVmZWbEoxYVdaWFdGOW5ja05I'
-    const doc = await resolver.resolve(did)
-    expect(doc.id).to.eq(did)
-    expect(doc.authentication[0].id).to.contain(did)
-  })
+  const dids = [
+    'did:lor:labdev:ZVdsVWQybHVhM0YxWDFoTFRqWk5jVk5X',
+    'did:lor:labtest:VFhKQ2FsazVSM1pWY0VaWmJXVlpSVmRS',
+    'did:lor:maxtest:WW5SeGFXZHNjRWxLTVVWeU9WUlJaa3A1'
+  ]
 
-  it('should get the complete DID Document for a DID on Maxonrow', async () => {
-    // using a valid DID, retrieve valid did doc
-    const did = 'did:lor:maxtest:WW5SeGFXZHNjRWxLTVVWeU9WUlJaa3A1'
-    const doc = await resolver.resolve(did)
-    expect(doc.id).to.eq(did)
-    expect(doc.authentication[0].id).to.contain(did)
+  dids.forEach((did) => {
+    let publicKey
+
+    it('should get the public key for a DID', async () => {
+      // using a valid DID, retrieve public key
+      publicKey = await LorenaDidResolver.getPublicKeyForDid(did)
+      expect(publicKey).to.not.be.empty
+    })
+
+    it('should get the complete DID Document for a DID', async () => {
+      // using a valid DID, retrieve public key
+      const doc = await resolver.resolve(did)
+      expect(doc.id).to.eq(did)
+      expect(doc.authentication[0].id).to.contain(did)
+      // the public key should be the same as the one in the blockchain
+      expect(doc.authentication[0].publicKey).to.eq(publicKey)
+    })
   })
 
   it('should get the fragment for a DID path', async () => {
@@ -50,5 +59,9 @@ describe('did-resolver interface', () => {
   it('should get nothing for an unknown DID', async () => {
     const doc = await resolver.resolve('did:lor:xxx:324793842738472')
     expect(doc).to.be.null
+  })
+
+  it('should disconnect cached connections for a clean shutdown', () => {
+    LorenaDidResolver.disconnectAll()
   })
 })
