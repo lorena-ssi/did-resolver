@@ -1,6 +1,7 @@
 .eslintrc.js
 .gitlab-ci.yml
 .nyc_output/
+.nycrc
 .travis.yml
 .vscode/
 coverage/

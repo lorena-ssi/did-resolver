@@ -39,6 +39,12 @@ resolver.resolve('did:lor:and:2nQtiQG6Cgm1GYTBaaKAgr76uY7iSexUkqX/some/path#frag
 const doc = await resolver.resolve('did:lor:and:2nQtiQG6Cgm1GYTBaaKAgr76uY7iSexUkqX/some/path#fragment=123')
 ```
 
+Outside of the standard `resolve()` method, LorenaDidResolver also provides a simple method to retrieve the public key for a DID, whether stored directly on the blockchain, in a DID Document, or through IPLD.
+
+```js
+const pubKey = LorenaDidResolver.getPublicKeyForDid('did:lor:maxtest:2nQtiQG6Cgm1GYTBaaKAgr76uY7iSexUkqX')
+
+```
 ## License
 
 MIT
