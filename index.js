@@ -3,6 +3,7 @@ const Matrix = require('@lorena-ssi/matrix-lib')
 const MaxonrowBlockchain = require('@lorena-ssi/maxonrow-lib')
 const SubstrateBlockchain = require('@lorena-ssi/substrate-lib')
 const bip39 = require('bip39')
+var debug = require('debug')('did-resolver:debug')
 
 // Cache connections to various networks
 const connections = {}
@@ -34,14 +35,19 @@ function getResolver () {
     }
 
     const connection = await getBlockchainConnection(did)
-
-    // Look it up in the blockchain with just the ID
-    const didParts = parsed.id.split(':')
-    const didDocHash = await connection.getDidDocHash(didParts[1])
+    let didDocHash
+    try {
+      // Look it up in the blockchain with just the ID
+      const didParts = parsed.id.split(':')
+      didDocHash = await connection.getDidDocHash(didParts[1])
+    } catch (e) {
+      debug(e)
+      return null
+    }
 
     // If there is no DID Document registered, return nothing
     if (didDocHash === '') {
-      return {}
+      return null
     }
 
     // Connect to Matrix to get the DID Document
@@ -50,7 +56,7 @@ function getResolver () {
 
     // no DID Document found: return nothing
     if (!didDoc || !didDoc.data) {
-      return {}
+      return null
     }
 
     // if there's no path, just return the whole shebang
@@ -132,10 +138,15 @@ async function getPublicKeyForDid (did) {
   // TODO: if not recorded in blockchain (depending on network type)
   // get the public key from the diddoc
 
-  const connection = await getBlockchainConnection(did)
-  const didParts = did.split(':')
-  const publicKey = await connection.getActualDidKey(didParts[3])
-  return publicKey
+  try {
+    const connection = await getBlockchainConnection(did)
+    const didParts = did.split(':')
+    const publicKey = await connection.getActualDidKey(didParts[3])
+    return publicKey
+  } catch (e) {
+    debug(e)
+    return ('')
+  }
 }
 
 /**

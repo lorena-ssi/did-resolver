@@ -17,20 +17,33 @@ describe('did-resolver interface', () => {
     expect(resolver.resolve).to.not.be.undefined
   })
 
-  it('should get nothing for a nonexistent DID', async () => {
-    // using a invalid DID, empty did doc
-    const did = 'did:lor:labdev:TuNaFiShSaNdWiChAnDfRiEsPlEaSe5q'
-    const doc = await resolver.resolve(did)
-    expect(doc).to.be.empty
+  const badDids = [
+    'did:lor:labdev:TuNaFiShSaNdWiChAnDfRiEsPlEaSe5q',
+    'did:lor:maxtest:TuNaFiShSaNdWiChAnDfRiEsPlEaSe5q',
+    'did:lor:fake:TuNaFiShSaNdWiChAnDfRiEsPlEaSe5q'
+  ]
+
+  badDids.forEach((did) => {
+    it('should get an empty public key for a nonexistent DID', async () => {
+      // using a valid DID, retrieve public key
+      const publicKey = await LorenaDidResolver.getPublicKeyForDid(did)
+      expect(publicKey).to.be.empty
+    })
+
+    it('should get nothing for a nonexistent DID', async () => {
+      // using a invalid DID, empty did doc
+      const doc = await resolver.resolve(did)
+      expect(doc).to.be.null
+    })
   })
 
-  const dids = [
+  const goodDids = [
     'did:lor:labdev:ZVdsVWQybHVhM0YxWDFoTFRqWk5jVk5X',
     'did:lor:labtest:VFhKQ2FsazVSM1pWY0VaWmJXVlpSVmRS',
     'did:lor:maxtest:WW5SeGFXZHNjRWxLTVVWeU9WUlJaa3A1'
   ]
 
-  dids.forEach((did) => {
+  goodDids.forEach((did) => {
     let publicKey
 
     it('should get the public key for a DID', async () => {
