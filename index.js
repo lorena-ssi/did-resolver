@@ -186,7 +186,7 @@ function getInfoForNetwork (network) {
 function disconnectAll () {
   Object.keys(connections).forEach((network) => {
     connections[network].disconnect()
-    connections[network] = undefined
+    delete connections[network]
   })
 }
 

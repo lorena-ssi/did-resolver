@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     commonjs: true,
     es6: true,
-    mocha: true,
+    mocha: true
   },
   extends: [
     'standard',
@@ -22,6 +22,6 @@ module.exports = {
     'jsdoc'
   ],
   rules: {
-    "no-global-assign": ["error", {"exceptions": ["require"]}]
+    'no-global-assign': ['error', { exceptions: ['require'] }]
   }
 }
