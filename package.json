@@ -1,6 +1,6 @@
 {
   "name": "@lorena-ssi/did-resolver",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Resolve DID Documents from DIDs in the Lorena namespace",
   "main": "index.js",
   "author": "Caelum Labs",
