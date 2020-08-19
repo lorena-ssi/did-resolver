@@ -38,9 +38,9 @@ describe('did-resolver interface', () => {
   })
 
   const goodDids = [
-    'did:lor:labdev:ZVdsVWQybHVhM0YxWDFoTFRqWk5jVk5X',
-    'did:lor:labtest:VFhKQ2FsazVSM1pWY0VaWmJXVlpSVmRS',
-    'did:lor:maxtest:WW5SeGFXZHNjRWxLTVVWeU9WUlJaa3A1'
+    // 'did:lor:labdev:ZVdsVWQybHVhM0YxWDFoTFRqWk5jVk5X',
+    'did:lor:labtest:WTNaQ2QwMUljVzlmTmxVMWFGWnVZMWx2' //,
+    // 'did:lor:maxtest:WW5SeGFXZHNjRWxLTVVWeU9WUlJaa3A1'
   ]
 
   goodDids.forEach((did) => {
